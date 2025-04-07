@@ -8,30 +8,16 @@ def select_img_from_video(video_file, board_pattern, select_rate=24, wait_msec=1
 
     # Select images
     img_select = []
-    frames_shown = 0
+    frames = 0
     while True:
         # Grab an images from the video
         valid, img = video.read()
         if not valid:
             break
-        
-        #select frame from every 24 frames.
-        frames_shown += 1
-        if frames_shown % select_rate == 0:    
+        #select frame from every 24th frames.
+        frames += 1
+        if frames % select_rate == 0:    
             img_select.append(img)
-            
-        #display = img.copy()
-        #cv.putText(display, f'NSelect: {len(img_select)}', (10, 25), cv.FONT_HERSHEY_DUPLEX, 0.6, (0, 255, 0))
-        #cv.imshow(wnd_name, display)
-        
-        complete, pts = cv.findChessboardCorners(img, board_pattern)
-        #cv.drawChessboardCorners(display, board_pattern, pts, complete)
-        #cv.imshow(wnd_name, display)
-        
-        # Process the key event
-        key = cv.waitKey(wait_msec)
-        if key == 27:             # Space: Pause and show corners
-            break
                 
     cv.destroyAllWindows()
     return img_select
@@ -55,7 +41,7 @@ def calib_camera_from_chessboard(images, board_pattern, board_cellsize, K=None, 
 
 
 if __name__ == '__main__':
-    video_file = 'Chess.MOV'
+    video_file = 'videos/Chess.MOV'
     board_pattern = (10, 7)
     board_cellsize = 0.025
 
@@ -94,7 +80,7 @@ if __name__ == '__main__':
         info = "Original"
         if show_rectify:
             if map1 is None or map2 is None:
-                new_K, roi = cv.getOptimalNewCameraMatrix(K, dist_coeff, (img.shape[1], img.shape[0]), alpha=0)  #to eliminate black area.
+                new_K, roi = cv.getOptimalNewCameraMatrix(K, dist_coeff, (img.shape[1], img.shape[0]), alpha=0)  #to eliminate black area, make new camera matrix.
                 map1, map2 = cv.initUndistortRectifyMap(K, dist_coeff, None, new_K, (img.shape[1], img.shape[0]), cv.CV_32FC1)
             img = cv.remap(img, map1, map2, interpolation=cv.INTER_LINEAR)
             info = "Rectified"
