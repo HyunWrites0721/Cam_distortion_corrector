@@ -13,9 +13,9 @@ Controls (while recording)
 - Tab key: Toggle between the original and rectified video
 
 Calibration result(from given chessboard video.)
-RMS error = 1.726774380729615
-fx, fy, cx, cy = 1.73193038e+03, 1.72300973e+03, 6.18500789e+02, 9.96528529e+02
-Distortion coefficient (k1, k2, p1, p2, k3) = [ 0.14031321 -0.05553018  0.01209608  0.0187642  -0.15186641]
+- RMS error = 1.726774380729615
+- fx, fy, cx, cy = 1.73193038e+03, 1.72300973e+03, 6.18500789e+02, 9.96528529e+02
+- Distortion coefficient (k1, k2, p1, p2, k3) = [ 0.14031321 -0.05553018  0.01209608  0.0187642  -0.15186641]
 
 Demo(corredted video)
 
